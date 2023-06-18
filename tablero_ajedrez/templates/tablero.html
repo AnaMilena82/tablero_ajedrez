@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- enlazar una hoja de estilo CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Tablero Ajedrez</title>
+    
+</head>
+<body>
+    <div class="contenedor">
+        {% if request.path == url_for('index') %}
+            {% set x = 8 %}
+            {% set y = 8 %}
+            <table>
+                {% for row in range(y) %}
+                <tr>
+                    {% for column in range(x) %}
+                        {% set is_black = (row + column) % 2 == 1 %}
+                        <td class="cuadro {% if is_black %}negro{% endif %}"></td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+
+
+        {% elif request.path == url_for('tableroy',y=y) %}
+            {% set x = 8 %}
+            <table>
+                {% for row in range(y) %}
+                <tr>
+                    {% for column in range(x) %}
+                        {% set is_black = (row + column) % 2 == 1 %}
+                        <td class="cuadro {% if is_black %}negro{% endif %}"></td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+
+        {% elif request.path == url_for('tableroxy',x=x, y=y) %}
+            <table>
+                {% for row in range(y) %}
+                <tr>
+                    {% for column in range(x) %}
+                        {% set is_black = (row + column) % 2 == 1 %}
+                        <td class="cuadro {% if is_black %}negro{% endif %}"></td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        
+        {% elif request.path == url_for('tableroxycolor',x=x, y=y,color1=color1, color2=color2) %}
+                           
+                <table>
+                    {% for row in range(y) %}
+                    <tr>
+                        {% for column in range(x) %}
+                            {% set is_color1 = (row + column) % 2 == 0 %}
+                            <td class="cuadro" style="background-color: {% if is_color1 %}{{ color1 }}{% else %}{{ color2 }}{% endif %}"></td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+        
+
+        {% endif %}
+    </div>
+       
+    </div>
+</body>
+</html>

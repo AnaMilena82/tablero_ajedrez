@@ -1,0 +1,16 @@
+.contenedor {
+    text-align: center;
+  }
+  
+.cuadro {
+  
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border: 1px solid black;
+  
+}
+.negro {
+    background-color: black;
+}
+
